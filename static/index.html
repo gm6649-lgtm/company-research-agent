@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Company Research Agent</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">🤖</span>
+        <span class="logo-text">Company Research Agent</span>
+      </div>
+      <span class="header-badge">Powered by Gemini AI</span>
+    </header>
+
+    <!-- Search Panel -->
+    <main class="search-panel">
+      <h1 class="hero-title">Instant AI Company Intelligence</h1>
+      <p class="hero-subtitle">
+        Enter a company name or URL and get a comprehensive research report &amp;
+        pre-call brief — in seconds.
+      </p>
+
+      <div class="search-card">
+        <div class="input-group">
+          <label for="company-input" class="input-label">Company Name or URL</label>
+          <input
+            type="text"
+            id="company-input"
+            class="input-field"
+            placeholder="e.g. BYJUS  or  https://byjus.com"
+            autocomplete="off"
+          />
+        </div>
+        <div class="input-group">
+          <label for="product-input" class="input-label">
+            Your Product / Service
+            <span class="label-hint">(optional — improves the pre-call report)</span>
+          </label>
+          <input
+            type="text"
+            id="product-input"
+            class="input-field"
+            placeholder="e.g. B2B SaaS HR platform for enterprises"
+            autocomplete="off"
+          />
+        </div>
+        <button id="research-btn" class="btn btn-primary" onclick="startResearch()">
+          <span class="btn-icon">🔍</span> Research
+        </button>
+      </div>
+
+      <!-- Progress -->
+      <div id="progress-section" class="progress-section hidden">
+        <div class="progress-header">
+          <span id="progress-label">Initialising…</span>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div id="progress-bar" class="progress-bar-fill" style="width:0%"></div>
+        </div>
+        <div class="pipeline-steps" id="pipeline-steps">
+          <div class="pipeline-step" data-step="1">
+            <span class="step-icon">⏳</span>
+            <span class="step-name">URL Extraction</span>
+          </div>
+          <div class="pipeline-step" data-step="2">
+            <span class="step-icon">⏳</span>
+            <span class="step-name">Website Scraping</span>
+          </div>
+          <div class="pipeline-step" data-step="3">
+            <span class="step-icon">⏳</span>
+            <span class="step-name">Web Research</span>
+          </div>
+          <div class="pipeline-step" data-step="3b">
+            <span class="step-icon">⏳</span>
+            <span class="step-name">LinkedIn Research</span>
+          </div>
+          <div class="pipeline-step" data-step="4">
+            <span class="step-icon">⏳</span>
+            <span class="step-name">AI Report Generation</span>
+          </div>
+          <div class="pipeline-step" data-step="5">
+            <span class="step-icon">⏳</span>
+            <span class="step-name">Pre-Call Report</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error banner -->
+      <div id="error-banner" class="error-banner hidden"></div>
+    </main>
+
+    <!-- Results Section -->
+    <section id="results-section" class="results-section hidden">
+      <div class="tabs">
+        <button class="tab active" data-tab="summary" onclick="switchTab('summary')">
+          📊 Company Report
+        </button>
+        <button class="tab" data-tab="precall" onclick="switchTab('precall')">
+          📞 Pre-Call Report
+        </button>
+      </div>
+
+      <div class="tab-actions">
+        <button class="btn btn-sm" onclick="copyReport()">📋 Copy Report</button>
+        <button class="btn btn-sm" onclick="downloadReport()">⬇️ Download .md</button>
+      </div>
+
+      <div id="tab-summary" class="tab-content report-content active"></div>
+      <div id="tab-precall" class="tab-content report-content"></div>
+    </section>
+
+    <footer class="app-footer">
+      Free tier · Google Gemini · DuckDuckGo Search · $0 cost
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
